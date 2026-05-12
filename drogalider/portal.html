@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drogalider — Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --navy: #0A1628; --surface: #0F1E38; --surface2: #162035; --accent: #2D6FE8; --accent2: #4A8FF5; --white: #F0F4FF; --muted: #8A9BBF; --border: rgba(255,255,255,0.07); --green: #22C55E; --green-bg: rgba(34,197,94,0.08); }
+  html, body { height: 100%; }
+  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white); min-height: 100vh; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(45,111,232,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(45,111,232,0.03) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+  .topbar { position: sticky; top: 0; z-index: 100; background: rgba(10,22,40,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 28px; display: flex; align-items: center; justify-content: space-between; }
+  .topbar-left { display: flex; align-items: center; gap: 10px; }
+  .topbar-logo { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.3); object-fit: cover; }
+  .topbar-name { font-size: 13px; font-weight: 600; }
+  .topbar-sub { font-size: 11px; color: var(--muted); }
+  .logout-btn { font-size: 12px; color: var(--muted); background: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 500; transition: color 0.2s; }
+  .logout-btn:hover { color: var(--white); }
+  .main { max-width: 720px; margin: 0 auto; padding: 48px 24px 64px; animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .page-title { font-size: clamp(20px, 4vw, 26px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .page-title span { color: var(--accent2); }
+  .page-sub { font-size: 13px; color: var(--muted); margin-bottom: 36px; }
+  .section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .months-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; margin-bottom: 40px; }
+  .month-card { display: flex; flex-direction: column; padding: 20px; background: rgba(255,255,255,0.025); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: inherit; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.15s; position: relative; overflow: hidden; }
+  .month-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity 0.2s; }
+  .month-card:hover { background: rgba(45,111,232,0.07); border-color: rgba(45,111,232,0.28); transform: translateY(-2px); }
+  .month-card:hover::before { opacity: 1; }
+  .month-card.latest { border-color: rgba(45,111,232,0.22); background: rgba(45,111,232,0.04); }
+  .month-card.latest::before { opacity: 1; }
+  .month-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; margin-bottom: 10px; align-self: flex-start; text-transform: uppercase; letter-spacing: 0.04em; }
+  .badge-latest { background: rgba(34,197,94,0.1); color: var(--green); }
+  .month-name { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 3px; }
+  .month-platform { font-size: 11px; color: var(--muted); margin-bottom: 14px; }
+  .month-stats { display: flex; gap: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .stat-val { font-size: 14px; font-weight: 700; letter-spacing: -0.02em; }
+  .stat-key { font-size: 10px; color: var(--muted); margin-top: 1px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .month-arrow { position: absolute; top: 18px; right: 18px; font-size: 16px; color: var(--accent2); opacity: 0; transform: translateX(-4px); transition: opacity 0.2s, transform 0.2s; }
+  .month-card:hover .month-arrow { opacity: 1; transform: translateX(0); }
+  .info-box { display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.15); border-radius: 10px; }
+  .info-text { font-size: 12px; color: rgba(201,168,76,0.8); line-height: 1.6; }
+  .info-text strong { color: #C9A84C; }
+  .footer { text-align: center; font-size: 10px; color: rgba(138,155,191,0.3); margin-top: 48px; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <div class="topbar-left">
+    <img class="topbar-logo" src="../assets/logo-gpv.webp" alt="GPV">
+    <div>
+      <div class="topbar-name">Drogalider Mallet</div>
+      <div class="topbar-sub">Portal de Relatórios</div>
+    </div>
+  </div>
+  <button class="logout-btn" onclick="logout()">← Sair</button>
+</nav>
+<main class="main">
+  <div class="page-title">Seus <span>relatórios</span></div>
+  <div class="page-sub">Clique em um mês para ver o relatório completo.</div>
+  <div class="section-label">2025</div>
+  <div class="months-grid">
+    <a class="month-card latest" href="dashboard-maio-2025.html">
+      <span class="month-arrow">→</span>
+      <span class="month-badge badge-latest">● Mais recente</span>
+      <div class="month-name">Maio 2025</div>
+      <div class="month-platform">Meta Ads · Últimos 30 dias</div>
+      <div class="month-stats">
+        <div class="stat"><div class="stat-val">137</div><div class="stat-key">Mensagens</div></div>
+        <div class="stat"><div class="stat-val">R$ 527</div><div class="stat-key">Investido</div></div>
+        <div class="stat"><div class="stat-val">26.380</div><div class="stat-key">Alcance</div></div>
+      </div>
+    </a>
+  </div>
+  <div class="info-box">
+    <span>💡</span>
+    <div class="info-text"><strong>Novo relatório todo mês.</strong> Assim que o mês fechar, o relatório atualizado aparece aqui automaticamente. Dúvidas? Fale com sua consultora na Agência GPV.</div>
+  </div>
+  <div class="footer">© 2025 Agência GPV · Relatórios gerados automaticamente</div>
+</main>
+<script src="../assets/auth.js"></script>
+<script>
+  GPV_AUTH.require('drogalider', 'login.html');
+  function logout() { GPV_AUTH.clear(); window.location.replace('../index.html'); }
+</script>
+</body>
+</html>

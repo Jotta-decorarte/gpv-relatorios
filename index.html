@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agência GPV — Portal de Relatórios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A1628; --navy2: #0F1E38;
+    --accent: #2D6FE8; --accent2: #4A8FF5;
+    --white: #F0F4FF; --muted: #8A9BBF;
+    --border: rgba(255,255,255,0.07);
+    --gold: rgba(201,168,76,0.4);
+  }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: 100vh;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: linear-gradient(rgba(45,111,232,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(45,111,232,0.04) 1px, transparent 1px);
+    background-size: 48px 48px; pointer-events: none;
+  }
+  body::after {
+    content: ''; position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -55%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(45,111,232,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .wrap {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 48px; padding: 32px 24px; width: 100%; max-width: 600px;
+    animation: fadeUp 0.6s ease both;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .logo-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .logo-img { width: 80px; height: 80px; border-radius: 50%; border: 1.5px solid var(--gold); box-shadow: 0 0 32px rgba(45,111,232,0.15); object-fit: cover; }
+  .logo-label { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+
+  .headline { text-align: center; }
+  .headline h1 { font-size: clamp(22px, 5vw, 28px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .headline h1 span { color: var(--accent2); }
+  .headline p { font-size: 13px; color: var(--muted); font-weight: 400; }
+
+  .clients-grid { display: grid; grid-template-columns: 1fr; gap: 10px; width: 100%; }
+  .client-card {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 22px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px; cursor: pointer;
+    text-decoration: none; color: inherit;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .client-card:hover { background: rgba(45,111,232,0.08); border-color: rgba(45,111,232,0.3); transform: translateY(-1px); }
+  .client-icon { width: 42px; height: 42px; border-radius: 8px; background: rgba(45,111,232,0.1); border: 1px solid rgba(45,111,232,0.2); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--accent2); flex-shrink: 0; letter-spacing: -0.02em; }
+  .client-info { flex: 1; }
+  .client-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 2px; }
+  .client-sub { font-size: 12px; color: var(--muted); font-weight: 400; }
+  .client-arrow { font-size: 16px; color: var(--muted); opacity: 0; transform: translateX(-4px); transition: opacity 0.2s, transform 0.2s; }
+  .client-card:hover .client-arrow { opacity: 1; transform: translateX(0); }
+
+  .footer { font-size: 11px; color: rgba(138,155,191,0.4); letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo-wrap">
+    <img class="logo-img" src="assets/logo-gpv.webp" alt="Agência GPV">
+    <span class="logo-label">Portal de Relatórios</span>
+  </div>
+
+  <div class="headline">
+    <h1>Selecione <span>seu portal</span></h1>
+    <p>Acesse os relatórios de performance da sua empresa.</p>
+  </div>
+
+  <div class="clients-grid">
+    <a class="client-card" href="drogalider/login.html">
+      <div class="client-icon">DL</div>
+      <div class="client-info">
+        <div class="client-name">Drogalider Mallet</div>
+        <div class="client-sub">Meta Ads · Performance mensal</div>
+      </div>
+      <span class="client-arrow">→</span>
+    </a>
+    <a class="client-card" href="importcell/login.html">
+      <div class="client-icon">IC</div>
+      <div class="client-info">
+        <div class="client-name">Import Cell BR</div>
+        <div class="client-sub">Meta Ads · Performance mensal</div>
+      </div>
+      <span class="client-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="footer">© 2025 Agência GPV · Todos os direitos reservados</div>
+</div>
+</body>
+</html>

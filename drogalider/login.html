@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drogalider — Acesso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --navy: #0A1628; --accent: #2D6FE8; --accent2: #4A8FF5; --white: #F0F4FF; --muted: #8A9BBF; --border: rgba(255,255,255,0.07); }
+  html, body { height: 100%; }
+  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white); display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(45,111,232,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(45,111,232,0.04) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+  body::after { content: ''; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-55%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(45,111,232,0.07) 0%, transparent 70%); pointer-events: none; }
+  .card { position: relative; z-index: 1; width: 100%; max-width: 400px; padding: 44px 38px; background: rgba(15,30,56,0.85); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(12px); animation: fadeUp 0.5s ease both; margin: 24px; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .back { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); text-decoration: none; margin-bottom: 28px; transition: color 0.2s; font-weight: 500; }
+  .back:hover { color: var(--white); }
+  .card-top { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 32px; }
+  .logo { width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid rgba(201,168,76,0.4); object-fit: cover; }
+  .card-title { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+  .card-sub { font-size: 12px; color: var(--muted); }
+  .error { display: none; align-items: center; gap: 6px; padding: 10px 14px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; font-size: 12px; color: #F87171; margin-bottom: 16px; }
+  .error.show { display: flex; }
+  .field { margin-bottom: 16px; }
+  label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; margin-bottom: 7px; }
+  input { width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; color: var(--white); font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
+  input:focus { border-color: rgba(45,111,232,0.5); background: rgba(45,111,232,0.05); }
+  input::placeholder { color: rgba(138,155,191,0.35); }
+  .btn { width: 100%; padding: 13px; background: var(--accent); border: none; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; margin-top: 6px; }
+  .btn:hover { background: var(--accent2); }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .footer { text-align: center; font-size: 11px; color: rgba(138,155,191,0.3); margin-top: 24px; }
+  .att-msg { font-size: 11px; color: rgba(239,68,68,0.6); text-align: center; margin-top: 10px; display: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <a class="back" href="../index.html">← Voltar</a>
+  <div class="card-top">
+    <img class="logo" src="../assets/logo-gpv.webp" alt="GPV">
+    <div class="card-title">Drogalider Mallet</div>
+    <div class="card-sub">Digite suas credenciais de acesso</div>
+  </div>
+  <div class="error" id="err">⚠ Usuário ou senha incorretos.</div>
+  <div class="field"><label>Usuário</label><input type="text" id="u" placeholder="seu usuário" autocomplete="off" spellcheck="false"></div>
+  <div class="field"><label>Senha</label><input type="password" id="p" placeholder="••••••••" autocomplete="off" onkeydown="if(event.key==='Enter')login()"></div>
+  <button class="btn" id="btn" onclick="login()">Entrar</button>
+  <div class="att-msg" id="att"></div>
+  <div class="footer">Agência GPV · Acesso restrito</div>
+</div>
+<script src="../assets/auth.js"></script>
+<script>
+  if (GPV_AUTH.get() === 'drogalider') window.location.replace('portal.html');
+  var fails = 0, blocked = false;
+  function login() {
+    if (blocked) return;
+    const u = document.getElementById('u').value.trim().toLowerCase();
+    const p = document.getElementById('p').value;
+    if (u === 'drogalider' && p === 'mudar123') {
+      GPV_AUTH.set('drogalider');
+      window.location.replace('portal.html');
+    } else {
+      fails++;
+      document.getElementById('p').value = '';
+      const err = document.getElementById('err');
+      err.classList.add('show');
+      setTimeout(() => err.classList.remove('show'), 3000);
+      if (fails >= 5) {
+        blocked = true;
+        const btn = document.getElementById('btn');
+        btn.disabled = true;
+        const att = document.getElementById('att');
+        att.style.display = 'block';
+        let s = 120;
+        att.textContent = 'Muitas tentativas. Aguarde ' + s + 's.';
+        const t = setInterval(() => {
+          s--;
+          att.textContent = 'Muitas tentativas. Aguarde ' + s + 's.';
+          if (s <= 0) { clearInterval(t); blocked = false; fails = 0; btn.disabled = false; att.style.display = 'none'; }
+        }, 1000);
+      }
+    }
+  }
+</script>
+</body>
+</html>
