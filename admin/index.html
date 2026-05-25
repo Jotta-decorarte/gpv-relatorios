@@ -19,17 +19,16 @@
   body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
   body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(45,111,232,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(45,111,232,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
 
-  /* LOGIN OVERLAY */
+  /* LOGIN */
   .login-overlay{position:fixed;inset:0;background:rgba(8,15,30,0.97);z-index:1000;display:flex;align-items:center;justify-content:center}
   .login-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;width:100%;max-width:380px;text-align:center}
-  .login-logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;margin:0 auto 20px}
-  .login-title{font-size:20px;font-weight:700;margin-bottom:6px}
+  .login-logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;margin:0 auto 20px;color:#fff}
+  .login-title{font-size:20px;font-weight:700;margin-bottom:4px}
   .login-sub{font-size:13px;color:var(--muted);margin-bottom:28px}
-  .login-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--white);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;margin-bottom:12px}
+  .login-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--white);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;margin-bottom:10px}
   .login-input:focus{border-color:var(--accent2)}
-  .login-btn{width:100%;padding:12px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:opacity .2s}
-  .login-btn:hover{opacity:.9}
-  .login-err{font-size:12px;color:var(--red);margin-top:8px;min-height:18px}
+  .login-btn{width:100%;padding:12px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer}
+  .login-err{font-size:12px;color:var(--red);margin-top:10px;min-height:16px}
 
   /* TOPBAR */
   .topbar{position:sticky;top:0;z-index:100;background:rgba(8,15,30,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:11px 28px;display:flex;align-items:center;justify-content:space-between}
@@ -42,17 +41,22 @@
 
   .page{max-width:1000px;margin:0 auto;padding:36px 24px 72px}
 
-  .page-header{margin-bottom:32px}
-  .page-header h1{font-size:24px;font-weight:700;letter-spacing:-.03em;margin-bottom:4px}
-  .page-header h1 span{color:var(--accent2)}
-  .page-header p{font-size:13px;color:var(--muted)}
+  /* TABS */
+  .main-tabs{display:flex;gap:4px;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:0}
+  .main-tab{padding:10px 20px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+  .main-tab:hover{color:var(--white)}
+  .main-tab.active{color:var(--accent2);border-bottom-color:var(--accent2)}
 
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  /* SECTION */
   .section-label{font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
   .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
 
   /* CLIENT TABS */
-  .client-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
-  .client-tab{padding:8px 20px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+  .client-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+  .client-tab{padding:7px 18px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
   .client-tab:hover{color:var(--white)}
   .client-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
 
@@ -69,7 +73,7 @@
   .status.err{display:block;background:var(--red-bg);border:1px solid rgba(239,68,68,0.2);color:var(--red)}
   .status.info{display:block;background:rgba(45,111,232,0.1);border:1px solid rgba(45,111,232,0.2);color:var(--accent2)}
 
-  /* REPORTS LIST */
+  /* REPORTS */
   .reports-list{display:flex;flex-direction:column;gap:8px}
   .report-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;transition:border-color .2s}
   .report-card:hover{border-color:rgba(45,111,232,0.3)}
@@ -79,21 +83,46 @@
   .report-dot.active{background:var(--green);box-shadow:0 0 6px var(--green)}
   .report-month{font-size:15px;font-weight:600}
   .report-meta{font-size:11px;color:var(--muted);margin-top:2px}
-  .report-right{display:flex;align-items:center;gap:16px}
-  .report-kpis{display:flex;gap:20px}
+  .report-right{display:flex;align-items:center;gap:12px}
+  .report-kpis{display:flex;gap:16px}
   .report-kpi-val{font-size:14px;font-weight:700}
   .report-kpi-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-  .report-actions{display:flex;gap:8px}
+  .report-actions{display:flex;gap:6px}
   .btn-view{padding:6px 14px;background:rgba(45,111,232,0.12);border:1px solid rgba(45,111,232,0.25);border-radius:6px;color:var(--accent2);font-size:12px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;transition:background .2s}
   .btn-view:hover{background:rgba(45,111,232,0.22)}
   .btn-del{padding:6px 12px;background:var(--red-bg);border:1px solid rgba(239,68,68,0.2);border-radius:6px;color:var(--red);font-size:12px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
   .btn-del:hover{background:rgba(239,68,68,0.15)}
-
   .badge-latest{font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:var(--msg-bg);color:var(--msg);text-transform:uppercase;letter-spacing:.06em}
 
-  .empty-list{text-align:center;padding:32px;color:var(--muted);font-size:13px;border:1px dashed var(--border);border-radius:10px}
+  /* USERS */
+  .users-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+  .user-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+  .user-left{display:flex;align-items:center;gap:12px}
+  .user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0}
+  .user-name{font-size:14px;font-weight:600}
+  .user-meta{font-size:11px;color:var(--muted);margin-top:2px}
+  .user-pass{font-size:11px;color:var(--muted);font-family:monospace;background:var(--surface2);padding:2px 8px;border-radius:4px;margin-top:3px;display:inline-block}
+  .user-right{display:flex;gap:8px;align-items:center}
+  .client-badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em}
+  .badge-importcell{background:var(--msg-bg);color:var(--msg)}
+  .badge-drogalider{background:var(--green-bg);color:var(--green)}
 
-  /* CONFIRM MODAL */
+  /* FORM NOVO USUÁRIO */
+  .new-user-form{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+  .form-title{font-size:14px;font-weight:600;margin-bottom:16px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end}
+  .form-field label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+  .form-field input,.form-field select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--white);font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
+  .form-field input:focus,.form-field select:focus{border-color:var(--accent2)}
+  .form-field select option{background:var(--surface2)}
+  .btn-add{padding:10px 20px;background:var(--green);border:none;border-radius:8px;color:#000;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;white-space:nowrap;transition:opacity .2s}
+  .btn-add:hover{opacity:.85}
+
+  .user-status{font-size:12px;margin-top:10px;padding:8px 12px;border-radius:6px;display:none}
+  .user-status.ok{display:block;background:var(--green-bg);color:var(--green)}
+  .user-status.err{display:block;background:var(--red-bg);color:var(--red)}
+
+  /* MODAL */
   .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;display:none;align-items:center;justify-content:center}
   .modal-overlay.show{display:flex}
   .modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;max-width:380px;width:100%;text-align:center}
@@ -103,8 +132,9 @@
   .modal-cancel{padding:9px 20px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif}
   .modal-confirm{padding:9px 20px;background:var(--red);border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
 
-  .loading-spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
-  @keyframes spin{to{transform:rotate(360deg)}}
+  .empty-list{text-align:center;padding:28px;color:var(--muted);font-size:13px;border:1px dashed var(--border);border-radius:10px}
+
+  @media(max-width:700px){.form-grid{grid-template-columns:1fr 1fr;}.form-grid .btn-add{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -121,11 +151,11 @@
   </div>
 </div>
 
-<!-- CONFIRM MODAL -->
+<!-- MODAL CONFIRMAR DELETE -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
-    <h3>Excluir relatório?</h3>
-    <p id="modalMsg">Esta ação não pode ser desfeita. O relatório será removido do banco de dados.</p>
+    <h3 id="modalTitle">Confirmar exclusão</h3>
+    <p id="modalMsg"></p>
     <div class="modal-btns">
       <button class="modal-cancel" onclick="closeModal()">Cancelar</button>
       <button class="modal-confirm" onclick="confirmDelete()">Excluir</button>
@@ -146,55 +176,87 @@
 </nav>
 
 <div class="page">
-  <div class="page-header">
-    <h1>Painel <span>Admin</span></h1>
-    <p>Gerencie os relatórios de todos os clientes. Importe CSVs e delete meses incorretos.</p>
+
+  <!-- MAIN TABS -->
+  <div class="main-tabs">
+    <button class="main-tab active" onclick="showTab('relatorios',this)">📊 Relatórios</button>
+    <button class="main-tab" onclick="showTab('usuarios',this)">👤 Usuários</button>
   </div>
 
-  <!-- CLIENT TABS -->
-  <div class="client-tabs">
-    <button class="client-tab active" onclick="selectClient('importcell',this)">Import Cell / Matheus</button>
-    <button class="client-tab" onclick="selectClient('drogalider',this)">Drogalider</button>
+  <!-- TAB: RELATÓRIOS -->
+  <div class="tab-panel active" id="tab-relatorios">
+
+    <div class="client-tabs">
+      <button class="client-tab active" onclick="selectClient('importcell',this)">Import Cell / Matheus</button>
+      <button class="client-tab" onclick="selectClient('drogalider',this)">Drogalider</button>
+    </div>
+
+    <div class="section-label">Importar novo relatório</div>
+    <div class="upload-box" id="uploadBox">
+      <input type="file" id="csvInput" accept=".csv" onchange="handleCSV(this)">
+      <div class="upload-title">📂 Arraste o CSV aqui ou clique para selecionar</div>
+      <div class="upload-sub">Meta Ads Manager → Campanhas → Selecione o mês completo → Exportar CSV</div>
+      <span class="upload-btn-lbl">Selecionar arquivo</span>
+    </div>
+    <div id="uploadStatus" class="status"></div>
+
+    <div class="section-label" style="margin-top:24px">Relatórios salvos</div>
+    <div id="reportsList" class="reports-list">
+      <div class="empty-list">Carregando...</div>
+    </div>
   </div>
 
-  <!-- UPLOAD -->
-  <div class="section-label">Importar novo relatório</div>
-  <div class="upload-box" id="uploadBox">
-    <input type="file" id="csvInput" accept=".csv" onchange="handleCSV(this)">
-    <div class="upload-title">📂 Arraste o CSV aqui ou clique para selecionar</div>
-    <div class="upload-sub">Exporte do Meta Ads Manager → Campanhas → Selecione o mês completo → Exportar CSV</div>
-    <span class="upload-btn-lbl">Selecionar arquivo</span>
-  </div>
-  <div id="uploadStatus" class="status"></div>
+  <!-- TAB: USUÁRIOS -->
+  <div class="tab-panel" id="tab-usuarios">
 
-  <!-- REPORTS -->
-  <div class="section-label" style="margin-top:28px">Relatórios salvos</div>
-  <div id="reportsList" class="reports-list">
-    <div class="empty-list">Carregando...</div>
+    <div class="section-label">Usuários cadastrados</div>
+    <div id="usersList" class="users-list">
+      <div class="empty-list">Carregando...</div>
+    </div>
+
+    <div class="section-label">Adicionar novo usuário</div>
+    <div class="new-user-form">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Usuário</label>
+          <input type="text" id="newUsername" placeholder="ex: drogalider">
+        </div>
+        <div class="form-field">
+          <label>Senha</label>
+          <input type="text" id="newPassword" placeholder="ex: senha123">
+        </div>
+        <div class="form-field">
+          <label>Cliente</label>
+          <select id="newClientId">
+            <option value="importcell">Import Cell / Matheus</option>
+            <option value="drogalider">Drogalider</option>
+          </select>
+        </div>
+        <button class="btn-add" onclick="addUser()">+ Adicionar</button>
+      </div>
+      <div id="userStatus" class="user-status"></div>
+    </div>
   </div>
 </div>
 
 <script>
-  const SUPABASE_URL = 'https://shoaxshrkcagkpheplhp.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_4R07t7BxqGANtdLF3GxuQQ_wu0UeUTG';
+  const SB = 'https://shoaxshrkcagkpheplhp.supabase.co';
+  const KEY = 'sb_publishable_4R07t7BxqGANtdLF3GxuQQ_wu0UeUTG';
   const ADMIN_PASS = 'gpv@admin2026';
-
-  const CLIENT_URLS = {
-    importcell: '../importcell/dashboard.html',
-    drogalider: '../drogalider/dashboard.html'
-  };
+  const CLIENT_URLS = { importcell: '../importcell/dashboard.html', drogalider: '../drogalider/dashboard.html' };
 
   let currentClient = 'importcell';
   let deleteTarget = null;
-  let allReports = [];
+  let deleteType = null;
 
-  // --- LOGIN ---
+  // --- AUTH ---
   function doLogin() {
     const pass = document.getElementById('adminPass').value;
     if (pass === ADMIN_PASS) {
       sessionStorage.setItem('gpv_admin', '1');
       document.getElementById('loginOverlay').style.display = 'none';
       loadReports();
+      loadUsers();
     } else {
       document.getElementById('loginErr').textContent = 'Senha incorreta.';
       setTimeout(() => document.getElementById('loginErr').textContent = '', 2000);
@@ -210,10 +272,18 @@
     if (sessionStorage.getItem('gpv_admin') === '1') {
       document.getElementById('loginOverlay').style.display = 'none';
       loadReports();
+      loadUsers();
     }
   }
 
-  // --- CLIENT SELECT ---
+  // --- TABS ---
+  function showTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.main-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
   function selectClient(client, btn) {
     currentClient = client;
     document.querySelectorAll('.client-tab').forEach(b => b.classList.remove('active'));
@@ -221,133 +291,191 @@
     loadReports();
   }
 
-  // --- LOAD REPORTS ---
+  // --- REPORTS ---
   async function loadReports() {
     document.getElementById('reportsList').innerHTML = '<div class="empty-list">Carregando...</div>';
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/reports?client_id=eq.${currentClient}&order=since.desc`, {
-        headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-      });
-      allReports = await res.json();
-      renderReports();
-    } catch(e) {
-      document.getElementById('reportsList').innerHTML = '<div class="empty-list">Erro ao carregar. Tente novamente.</div>';
-    }
+    const res = await fetch(`${SB}/rest/v1/reports?client_id=eq.${currentClient}&order=since.desc`, { headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY } });
+    const rows = await res.json();
+    renderReports(rows || []);
   }
 
-  function renderReports() {
+  function renderReports(rows) {
     const el = document.getElementById('reportsList');
-    if (!allReports.length) {
-      el.innerHTML = '<div class="empty-list">Nenhum relatório encontrado para este cliente.</div>';
-      return;
-    }
-
-    el.innerHTML = allReports.map((r, i) => {
+    if (!rows.length) { el.innerHTML = '<div class="empty-list">Nenhum relatório para este cliente.</div>'; return; }
+    el.innerHTML = rows.map((r, i) => {
       const since = new Date(r.since + 'T00:00:00');
-      const mesNome = since.toLocaleDateString('pt-BR', {month:'long', year:'numeric'});
-      const mesLabel = mesNome.charAt(0).toUpperCase() + mesNome.slice(1);
+      const ml = capitalize(since.toLocaleDateString('pt-BR', {month:'long', year:'numeric'}));
       const data = r.data || [];
-      const isLatest = i === 0;
-
-      let spend = 0, conv = 0, reach = 0;
-      data.forEach(row => {
-        spend += parseFloat(row['Valor usado (BRL)'] || 0);
-        conv  += parseFloat(row['Resultados'] || 0);
-        reach += parseFloat(row['Alcance'] || 0);
-      });
-
-      const ativos = data.filter(row => (row['Veiculação da campanha']||'').toLowerCase() === 'active' && parseFloat(row['Valor usado (BRL)']||0) > 0).length;
-
+      let spend=0,conv=0,reach=0;
+      data.forEach(row => { spend+=parseFloat(row['Valor usado (BRL)']||0); conv+=parseFloat(row['Resultados']||0); reach+=parseFloat(row['Alcance']||0); });
+      const ativos = data.filter(row => (row['Veiculação da campanha']||'').toLowerCase()==='active' && parseFloat(row['Valor usado (BRL)']||0)>0).length;
+      const isLatest = i===0;
       return `<div class="report-card ${isLatest?'latest':''}">
         <div class="report-left">
           <div class="report-dot ${isLatest?'active':''}"></div>
           <div>
             <div style="display:flex;align-items:center;gap:8px">
-              <div class="report-month">${mesLabel}</div>
-              ${isLatest ? '<span class="badge-latest">● Mais recente</span>' : ''}
+              <div class="report-month">${ml}</div>
+              ${isLatest?'<span class="badge-latest">● Mais recente</span>':''}
             </div>
             <div class="report-meta">${r.since} → ${r.until} · ${ativos} campanhas ativas</div>
           </div>
         </div>
         <div class="report-right">
           <div class="report-kpis">
-            ${conv > 0 ? `<div><div class="report-kpi-val" style="color:var(--msg)">${Math.round(conv)}</div><div class="report-kpi-label">Resultados</div></div>` : ''}
+            ${conv>0?`<div><div class="report-kpi-val" style="color:var(--msg)">${Math.round(conv)}</div><div class="report-kpi-label">Resultados</div></div>`:''}
             <div><div class="report-kpi-val" style="color:var(--yellow)">R$ ${Math.round(spend).toLocaleString('pt-BR')}</div><div class="report-kpi-label">Investido</div></div>
             <div><div class="report-kpi-val" style="color:var(--green)">${reach>=1000?(reach/1000).toFixed(1)+'k':Math.round(reach)}</div><div class="report-kpi-label">Alcance</div></div>
           </div>
           <div class="report-actions">
             <a class="btn-view" href="${CLIENT_URLS[currentClient]}?since=${r.since}&until=${r.until}" target="_blank">Ver →</a>
-            <button class="btn-del" onclick="askDelete(${r.id},'${mesLabel}','${r.since}','${r.until}')">🗑 Excluir</button>
+            <button class="btn-del" onclick="askDelete('report',${r.id},'${ml}')">🗑</button>
           </div>
         </div>
       </div>`;
     }).join('');
   }
 
-  // --- UPLOAD CSV ---
+  // --- USERS ---
+  async function loadUsers() {
+    document.getElementById('usersList').innerHTML = '<div class="empty-list">Carregando...</div>';
+    const res = await fetch(`${SB}/rest/v1/users?order=created_at.asc`, { headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY } });
+    const rows = await res.json();
+    renderUsers(rows || []);
+  }
+
+  function renderUsers(rows) {
+    const el = document.getElementById('usersList');
+    if (!rows.length) { el.innerHTML = '<div class="empty-list">Nenhum usuário cadastrado.</div>'; return; }
+    const clientLabel = { importcell: 'Import Cell', drogalider: 'Drogalider' };
+    el.innerHTML = rows.map(u => `
+      <div class="user-card">
+        <div class="user-left">
+          <div class="user-avatar">${u.username.charAt(0).toUpperCase()}</div>
+          <div>
+            <div class="user-name">${u.username}</div>
+            <div class="user-pass">🔑 ${u.password}</div>
+          </div>
+        </div>
+        <div class="user-right">
+          <span class="client-badge badge-${u.client_id}">${clientLabel[u.client_id]||u.client_id}</span>
+          <button class="btn-del" onclick="askDelete('user',${u.id},'${u.username}')">🗑</button>
+        </div>
+      </div>`).join('');
+  }
+
+  async function addUser() {
+    const username = document.getElementById('newUsername').value.trim();
+    const password = document.getElementById('newPassword').value.trim();
+    const client_id = document.getElementById('newClientId').value;
+    const statusEl = document.getElementById('userStatus');
+
+    if (!username || !password) { showUserStatus('Preencha usuário e senha.','err'); return; }
+
+    try {
+      // Verificar se já existe
+      const check = await fetch(`${SB}/rest/v1/users?username=eq.${encodeURIComponent(username)}`, { headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY } });
+      const existing = await check.json();
+      if (existing && existing.length > 0) { showUserStatus('Usuário já existe. Escolha outro nome.','err'); return; }
+
+      await fetch(`${SB}/rest/v1/users`, {
+        method: 'POST',
+        headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+        body: JSON.stringify({ username, password, client_id })
+      });
+      showUserStatus(`✓ Usuário "${username}" criado com sucesso!`, 'ok');
+      document.getElementById('newUsername').value = '';
+      document.getElementById('newPassword').value = '';
+      loadUsers();
+    } catch(e) {
+      showUserStatus('Erro ao criar usuário. Tente novamente.', 'err');
+    }
+  }
+
+  function showUserStatus(msg, type) {
+    const el = document.getElementById('userStatus');
+    el.textContent = msg;
+    el.className = 'user-status ' + type;
+    if (type === 'ok') setTimeout(() => el.className = 'user-status', 4000);
+  }
+
+  // --- DELETE ---
+  function askDelete(type, id, label) {
+    deleteTarget = { type, id, label };
+    deleteType = type;
+    document.getElementById('modalTitle').textContent = type === 'report' ? 'Excluir relatório?' : 'Excluir usuário?';
+    document.getElementById('modalMsg').textContent = type === 'report'
+      ? `Tem certeza que deseja excluir o relatório de ${label}? Esta ação não pode ser desfeita.`
+      : `Tem certeza que deseja excluir o usuário "${label}"? O cliente perderá o acesso.`;
+    document.getElementById('modalOverlay').classList.add('show');
+  }
+
+  function closeModal() { deleteTarget = null; document.getElementById('modalOverlay').classList.remove('show'); }
+
+  async function confirmDelete() {
+    if (!deleteTarget) return;
+    document.getElementById('modalOverlay').classList.remove('show');
+    const { type, id, label } = deleteTarget;
+
+    if (type === 'report') {
+      setUploadStatus(`Excluindo ${label}...`, 'info');
+      await fetch(`${SB}/rest/v1/reports?id=eq.${id}`, { method: 'DELETE', headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY } });
+      setUploadStatus(`✓ Relatório de ${label} excluído.`, 'ok');
+      loadReports();
+    } else {
+      await fetch(`${SB}/rest/v1/users?id=eq.${id}`, { method: 'DELETE', headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY } });
+      showUserStatus(`✓ Usuário "${label}" excluído.`, 'ok');
+      loadUsers();
+    }
+    deleteTarget = null;
+  }
+
+  // --- CSV UPLOAD ---
   function handleCSV(input) {
     const file = input.files[0];
     if (!file) return;
-    setStatus('Processando CSV...', 'info');
-
+    setUploadStatus('Processando CSV...', 'info');
     const reader = new FileReader();
     reader.onload = async (e) => {
       try {
         const rows = parseCSV(e.target.result);
-        const comDados = rows.filter(r => parseFloat(r['Valor usado (BRL)'] || 0) > 0);
+        const comDados = rows.filter(r => parseFloat(r['Valor usado (BRL)']||0) > 0);
+        if (!comDados.length) { setUploadStatus('Nenhuma campanha com gasto. Verifique o período exportado.', 'err'); return; }
 
-        if (!comDados.length) {
-          setStatus('Nenhuma campanha com gasto encontrada neste CSV. Verifique se exportou o período correto.', 'err');
-          return;
-        }
-
-        // Detectar datas do CSV
         const sinces = rows.map(r => r['Início dos relatórios']).filter(Boolean).sort();
         const untils = rows.map(r => r['Encerramento dos relatórios']).filter(Boolean).sort().reverse();
-        const since = sinces[0];
-        const until = untils[0];
+        const since = sinces[0], until = untils[0];
+        if (!since) { setUploadStatus('Não foi possível detectar o período do CSV.', 'err'); return; }
 
-        if (!since || !until) {
-          setStatus('Não foi possível detectar o período do CSV. Verifique o arquivo.', 'err');
-          return;
-        }
+        const mesNome = capitalize(new Date(since + 'T00:00:00').toLocaleDateString('pt-BR', {month:'long', year:'numeric'}));
 
-        const mesNome = new Date(since + 'T00:00:00').toLocaleDateString('pt-BR', {month:'long', year:'numeric'});
-
-        // Verificar se já existe
-        const checkRes = await fetch(`${SUPABASE_URL}/rest/v1/reports?client_id=eq.${currentClient}&since=eq.${since}`, {
-          headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        const existing = await checkRes.json();
+        // Verificar duplicata
+        const check = await fetch(`${SB}/rest/v1/reports?client_id=eq.${currentClient}&since=eq.${since}`, { headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY } });
+        const existing = await check.json();
 
         if (existing && existing.length > 0) {
-          // Atualizar (substituir)
-          await fetch(`${SUPABASE_URL}/rest/v1/reports?id=eq.${existing[0].id}`, {
+          await fetch(`${SB}/rest/v1/reports?id=eq.${existing[0].id}`, {
             method: 'PATCH',
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' },
+            headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json' },
             body: JSON.stringify({ data: rows, until, updated_at: new Date().toISOString() })
           });
-          setStatus(`✓ Relatório de ${mesNome.charAt(0).toUpperCase()+mesNome.slice(1)} atualizado com sucesso! (${comDados.length} campanhas)`, 'ok');
+          setUploadStatus(`✓ ${mesNome} atualizado! (${comDados.length} campanhas)`, 'ok');
         } else {
-          // Inserir novo
-          await fetch(`${SUPABASE_URL}/rest/v1/reports`, {
+          await fetch(`${SB}/rest/v1/reports`, {
             method: 'POST',
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
             body: JSON.stringify({ client_id: currentClient, since, until, data: rows })
           });
-          setStatus(`✓ Relatório de ${mesNome.charAt(0).toUpperCase()+mesNome.slice(1)} importado! (${comDados.length} campanhas com dados)`, 'ok');
+          setUploadStatus(`✓ ${mesNome} importado com sucesso! (${comDados.length} campanhas)`, 'ok');
         }
-
-        await loadReports();
-      } catch(err) {
-        setStatus('Erro: ' + err.message, 'err');
-      }
+        loadReports();
+      } catch(err) { setUploadStatus('Erro: ' + err.message, 'err'); }
     };
     reader.readAsText(file, 'UTF-8');
     input.value = '';
   }
 
-  function setStatus(msg, type) {
+  function setUploadStatus(msg, type) {
     const el = document.getElementById('uploadStatus');
     el.textContent = msg;
     el.className = 'status ' + type;
@@ -356,7 +484,6 @@
 
   function parseCSV(text) {
     const lines = text.trim().split('\n');
-    if (lines.length < 2) throw new Error('CSV vazio');
     const headers = parseCSVLine(lines[0]);
     const rows = [];
     for (let i = 1; i < lines.length; i++) {
@@ -373,43 +500,13 @@
     const result = []; let cur = ''; let inQ = false;
     for (let i = 0; i < line.length; i++) {
       const c = line[i];
-      if (c === '"') { inQ = !inQ; }
-      else if (c === ',' && !inQ) { result.push(cur); cur = ''; }
-      else { cur += c; }
+      if (c==='"') { inQ=!inQ; } else if (c===','&&!inQ) { result.push(cur); cur=''; } else { cur+=c; }
     }
     result.push(cur);
     return result;
   }
 
-  // --- DELETE ---
-  function askDelete(id, mesLabel, since, until) {
-    deleteTarget = { id, mesLabel, since, until };
-    document.getElementById('modalMsg').textContent = `Tem certeza que deseja excluir o relatório de ${mesLabel}? Esta ação não pode ser desfeita.`;
-    document.getElementById('modalOverlay').classList.add('show');
-  }
-
-  function closeModal() {
-    deleteTarget = null;
-    document.getElementById('modalOverlay').classList.remove('show');
-  }
-
-  async function confirmDelete() {
-    if (!deleteTarget) return;
-    document.getElementById('modalOverlay').classList.remove('show');
-    setStatus(`Excluindo relatório de ${deleteTarget.mesLabel}...`, 'info');
-
-    try {
-      await fetch(`${SUPABASE_URL}/rest/v1/reports?id=eq.${deleteTarget.id}`, {
-        method: 'DELETE',
-        headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-      });
-      setStatus(`✓ Relatório de ${deleteTarget.mesLabel} excluído com sucesso.`, 'ok');
-      deleteTarget = null;
-      await loadReports();
-    } catch(e) {
-      setStatus('Erro ao excluir. Tente novamente.', 'err');
-    }
-  }
+  function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
   // Drag & drop
   const box = document.getElementById('uploadBox');
