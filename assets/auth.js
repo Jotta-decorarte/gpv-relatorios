@@ -1,22 +1,19 @@
-// GPV Auth System — v2.0
-// Sessão expira em 8 horas
-// Níveis: cliente (só visualiza) e admin (gerencia tudo)
+// GPV Auth System — v3.0
+// Login via banco de dados Supabase
+// Admin: senha fixa | Cliente: usuário + senha no banco
 
 const GPV_AUTH = {
-  SESSION_DURATION: 8 * 60 * 60 * 1000,
+  SUPABASE_URL: 'https://shoaxshrkcagkpheplhp.supabase.co',
+  SUPABASE_KEY: 'sb_publishable_4R07t7BxqGANtdLF3GxuQQ_wu0UeUTG',
   ADMIN_PASSWORD: 'gpv@admin2026',
+  SESSION_DURATION: 8 * 60 * 60 * 1000,
 
-  set: function(client) {
-    const session = { client: client, role: 'client', expires: Date.now() + this.SESSION_DURATION };
+  setSession: function(client, role) {
+    const session = { client, role, expires: Date.now() + this.SESSION_DURATION };
     sessionStorage.setItem('gpv_session', JSON.stringify(session));
   },
 
-  setAdmin: function() {
-    const session = { client: 'admin', role: 'admin', expires: Date.now() + this.SESSION_DURATION };
-    sessionStorage.setItem('gpv_session', JSON.stringify(session));
-  },
-
-  get: function() {
+  getSession: function() {
     try {
       const raw = sessionStorage.getItem('gpv_session');
       if (!raw) return null;
@@ -27,7 +24,7 @@ const GPV_AUTH = {
   },
 
   isAdmin: function() {
-    const s = this.get();
+    const s = this.getSession();
     return s && s.role === 'admin';
   },
 
@@ -35,16 +32,36 @@ const GPV_AUTH = {
     sessionStorage.removeItem('gpv_session');
   },
 
+  // Login do cliente via banco
+  loginClient: async function(username, password) {
+    const res = await fetch(`${this.SUPABASE_URL}/rest/v1/users?username=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(password)}&select=client_id`, {
+      headers: { 'apikey': this.SUPABASE_KEY, 'Authorization': 'Bearer ' + this.SUPABASE_KEY }
+    });
+    const rows = await res.json();
+    if (rows && rows.length > 0) {
+      this.setSession(rows[0].client_id, 'client');
+      return { ok: true, client: rows[0].client_id };
+    }
+    return { ok: false };
+  },
+
+  // Login admin
+  loginAdmin: function(password) {
+    if (password === this.ADMIN_PASSWORD) {
+      this.setSession('admin', 'admin');
+      return true;
+    }
+    return false;
+  },
+
   require: function(expectedClient, loginPath) {
-    const session = this.get();
-    // Admin pode acessar qualquer área
+    const session = this.getSession();
     if (session && session.role === 'admin') return true;
     if (!session || session.client !== expectedClient) {
       this.clear();
       window.location.replace(loginPath);
       return false;
     }
-    history.replaceState(null, '', loginPath.replace('login.html', ''));
     return true;
   },
 
