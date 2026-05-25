@@ -1,0 +1,9 @@
+{
+  "routes": [
+    { "src": "/matheus", "dest": "/matheus/index.html" },
+    { "src": "/matheus/(.*)", "dest": "/matheus/$1" },
+    { "src": "/drogalider/(.*)", "dest": "/drogalider/$1" },
+    { "src": "/importcell/(.*)", "dest": "/importcell/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
